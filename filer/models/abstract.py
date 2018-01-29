@@ -41,6 +41,7 @@ class BaseImage(File):
     file_ptr = models.OneToOneField(
         to='filer.File',
         related_name='%(app_label)s_%(class)s_file',
+        parent_link=True,
         on_delete=models.CASCADE,
     )
 

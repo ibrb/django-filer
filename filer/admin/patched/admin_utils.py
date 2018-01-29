@@ -16,7 +16,12 @@ from __future__ import absolute_import, unicode_literals
 from collections import defaultdict
 
 from django.contrib.auth import get_permission_codename
-from django.core.urlresolvers import NoReverseMatch, reverse
+try:
+    from django.core.urlresolvers import reverse
+    from django.core.urlresolvers import NoReverseMatch
+except ImportError:
+    from django.urls import reverse
+    from django.urls import NoReverseMatch
 from django.db import models
 from django.db.models.deletion import Collector
 from django.utils.html import format_html

@@ -2,7 +2,10 @@
 
 from __future__ import absolute_import
 
-from django.core import urlresolvers
+try:
+    from django.core import urlresolvers
+except ImportError:
+    import django.urls as urlresolvers
 from django.utils.translation import ugettext_lazy as _
 
 from . import mixins
