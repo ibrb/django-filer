@@ -12,6 +12,12 @@ except ImportError:
 from django.utils.text import Truncator
 
 
+def is_authenticated(user):
+    return user.is_authenticated()\
+        if hasattr(user.is_authenticated, '__call__')\
+        else user.is_authenticated
+
+
 def truncate_words(s, num, end_text='...'):
     # truncate_words was removed in Django 1.5.
     truncate = end_text and ' %s' % end_text or ''

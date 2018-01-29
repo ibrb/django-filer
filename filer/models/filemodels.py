@@ -22,6 +22,7 @@ from . import mixins
 from .. import settings as filer_settings
 from ..fields.multistorage_file import MultiStorageFileField
 from ..utils.compatibility import python_2_unicode_compatible
+from ..utils.compatibility import is_authenticated
 from .foldermodels import Folder
 
 try:
@@ -235,7 +236,7 @@ class File(PolymorphicModel, mixins.IconsMixin):
         image. Return the string 'ALL' if the user has all rights.
         """
         user = request.user
-        if not user.is_authenticated():
+        if not is_authenticated(user):
             return False
         elif user.is_superuser:
             return True
