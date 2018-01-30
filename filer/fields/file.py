@@ -7,7 +7,10 @@ import warnings
 from django import forms
 from django.contrib.admin.sites import site
 from django.contrib.admin.widgets import ForeignKeyRawIdWidget
-from django.core.urlresolvers import reverse
+try:
+    from django.core.urlresolvers import reverse
+except ImportError:
+    from django.urls import reverse
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.http import urlencode
@@ -134,7 +137,7 @@ class FilerFileField(models.ForeignKey):
         # while letting the caller override them.
         defaults = {
             'form_class': self.default_form_class,
-            'rel': self.rel,
+            'rel': self.remote_field,
         }
         defaults.update(kwargs)
         return super(FilerFileField, self).formfield(**defaults)
